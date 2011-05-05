@@ -33,7 +33,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     4. Find the `Elastic IP` and `Private IP address`, like the image below:
 
-    ![Alt text](/path/to/img.jpg)
+    ![EC2 example demonstrating where the IP addresses are](https://github.com/iandennismiller/swandive/raw/master/doc/ec2_example.png)
 
     If you need a primer on launching an EC2 machine instance, check out the appendix.
 
