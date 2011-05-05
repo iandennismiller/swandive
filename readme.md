@@ -90,9 +90,9 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Why are there two keys (user and machine)?
 
-    One key is often called something like 'machine key', 'system secret', or 'machine password', and it is used to make initial contact with the VPN server.  Everyone who contacts this VPN will use the same machine key, in the same way that everyone enters the same password for a wifi access point.  This key is stored in `files/ipsec.secrets`.
+    One key is often called something like "machine key", "system secret", or "machine password", and it is used to make initial contact with the VPN server.  Everyone who contacts this VPN will use the same machine key, in the same way that everyone enters the same password for a wifi access point.  This key is stored in `files/ipsec.secrets`.
 
-    After connecting, the VPN server requires each user to authenticate with a username and password.  This is sometimes called a 'user key', 'user secret', 'user password'...  Each user who connects to the VPN will have their own username and password, which are stored in `files/chap-secrets`.
+    After connecting, the VPN server requires each user to authenticate with a username and password.  This is sometimes called a "user key", "user secret", "user password"...  Each user who connects to the VPN will have their own username and password, which are stored in `files/chap-secrets`.
 
 0. Why use a pre-shared key instead of SSL certificates?
 
