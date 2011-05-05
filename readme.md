@@ -114,7 +114,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     ```
     mv ~/Downloads/ec2identity.pem ~/.ssh && chmod 400 ~/.ssh/ec2identity.pem
-    ELASTIC_IP=50.17.224.58
+    ELASTIC_IP=50.XX.XX.XX
     echo -e "\nHost $ELASTIC_IP\n  IdentityFile ~/.ssh/ec2identity.pem\n" >> ~/.ssh/config
     ```
 
@@ -126,7 +126,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     ssh ubuntu@$ELASTIC_IP
     ```
 
-    The following steps configure root SSH access, set some passwords, update the system, configure the timezone, and remote some unneeded processes.
+    The following steps configure root SSH access, set some passwords, update the system, configure the timezone, and remove some unneeded processes.
 
     ```
     sudo su -
