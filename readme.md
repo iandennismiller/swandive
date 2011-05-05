@@ -45,7 +45,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     2. Pick a new `machine_key`, `user_name`, and `user_key`.  The two keys should be random, so the following perl one-liner may be useful in creating new passwords for you.
 
-    ```perl
+    ```
     perl -e '@c=(48..57,65..90,97..122);foreach $i (1..32){$p.=chr($c[rand(@c)]);}print $p;'
     ```
 
