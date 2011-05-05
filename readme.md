@@ -1,8 +1,8 @@
-## introduction
+# introduction
 
 I want to encrypt my Internet traffic when using an unprotected wifi access point, and you probably do too.  The most widely supported, secure way to achieve this is with L2TP and IPsec.  I want to run this on a virtual machine somewhere in the cloud, like on an Amazon EC2 micro instance (approximately $16/month).  *Swandive creates a secure VPN transport in the cloud, letting me encrypt my laptop and iPod touch on the road.*
 
-## requirements
+# requirements
 
 - Amazon EC2 account
 - one EC2 SSH keypair
@@ -10,11 +10,9 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 - one Amazon Elastic IP address
 - Xenadu (http://github.com/iandennismiller/xenadu)
 
-## installation
+# installation
 
-0. Download Swandive
-
-    Do this on your local machine, not on the cloud machine.
+0. Download Swandive to your local machine
 
     ```
     curl -L https://github.com/iandennismiller/swandive/tarball/master -o swandive.tgz
@@ -74,6 +72,8 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     Swandive is set up, so configure your clients and start using your new VPN.  You can find the 
 
+# appendix
+
 ## Authentication
 
 0. Why use a pre-shared key instead of SSL certificates?
@@ -90,27 +90,27 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     After connecting, the VPN server requires each user to authenticate with a username and password.  This is sometimes called a 'user key', 'user secret', 'user password'...  Each user who connects to the VPN will have their own username and password, which are stored in `files/chap-secrets`.
 
-# appendix
-
 ## How to prepare an EC2 machine instance
 
 For a fantastic overview of this process, be sure to read .
 
-### configure the new instance
+1. configure the new instance
 
-```
-ssh -i id_rsa-gsg-keypair ubuntu@swandive.example.com
-```
+    ```
+    ssh -i id_rsa-gsg-keypair ubuntu@swandive.example.com
+    ```
 
-```
-sudo su -
-passwd ubuntu
-passwd
-apt-get update && apt-get upgrade -y
-dpkg-reconfigure tzdata
-initctl stop tty2 && initctl stop tty3 && initctl stop tty4 && initctl stop tty5 && initctl stop tty6
-rm /etc/init/tty2.conf /etc/init/tty3.conf /etc/init/tty4.conf /etc/init/tty5.conf /etc/init/tty6.conf
-reboot now
-```
+    ```
+    sudo su -
+    passwd ubuntu
+    passwd
+    apt-get update && apt-get upgrade -y
+    dpkg-reconfigure tzdata
+    initctl stop tty2 && initctl stop tty3 && initctl stop tty4 && initctl stop tty5 && initctl stop tty6
+    rm /etc/init/tty2.conf /etc/init/tty3.conf /etc/init/tty4.conf /etc/init/tty5.conf /etc/init/tty6.conf
+    reboot now
+    ```
 
-### add public key to /root/.ssh
+2. add public key to /root/.ssh
+
+    ...to be continued
