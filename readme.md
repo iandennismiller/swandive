@@ -12,7 +12,8 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 ## installation
 
-    1. Download and install Xenadu and Swandive
+1. Download and install Xenadu and Swandive
+
     ```
     curl -L https://github.com/iandennismiller/xenadu/tarball/master -o xenadu.tgz
     curl -L https://github.com/iandennismiller/swandive/tarball/master -o swandive.tgz
@@ -22,7 +23,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     python setup.py install
     ```
 
-    2. Next, log in to a fresh machine instance.
+2. Next, log in to a fresh machine instance.
 
     If you need a primer on launching an EC2 machine instance, check out the appendix.
 
