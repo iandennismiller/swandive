@@ -2,7 +2,6 @@
 from Xenadu import XenaduConfig, Perm
 env = { 'ssh': { "user": "root", "address": "swandive.example.com" } }
 mapping = [
-    #['/etc/ssl/openssl.cnf', "openssl.cnf", Perm.root_644],
     ['/etc/sysctl.conf', "sysctl.conf", Perm.root_644],
     ['/etc/network/if-up.d/iptables', "iptables", Perm.root_755],
     ['/etc/iptables.conf', "iptables.conf", Perm.root_644],
