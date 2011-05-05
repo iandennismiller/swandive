@@ -39,7 +39,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Edit `swandive.ini` to set your IP addresses
 
-    Change `public_ip` (this is Elastic IP) and `private_ip` to match your instance.  Also, take note of `machine_key`, `user_key`, and `user_name`; your VPN client will use these strings to connect with the VPN server.  You should see long, random keys in swandive.ini, but if you instead see __USER_KEY__, then be sure to run setup.sh which will generate random keys for you.
+    Change `public_ip` (this is Elastic IP) and `private_ip` to match your instance.  Also, take note of `machine_key`, `user_key`, and `user_name`; your VPN client will use these strings to connect with the VPN server.  You should see long, random keys in swandive.ini, but if you instead see _USER_KEY_, then be sure to run setup.sh which will generate random keys for you.
 
     Unless you need to change how your VPN allocates IP addresses, you don't need to deal with the rest of the settings.
 
