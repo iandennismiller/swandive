@@ -22,7 +22,7 @@ function generate_keys() {
     X_USER_KEY=`perl -e '@c=(48..57,65..90,97..122); foreach (1..32) { print chr($c[rand(@c)]) }'`
     sed "s/__USER_KEY__/${X_USER_KEY}/g" swandive.ini > TMPFILE && mv TMPFILE swandive.ini
 
-    sed "s/IMPORTANT: you need to run ./setup.sh//g" swandive.ini > TMPFILE && mv TMPFILE swandive.ini
+    sed "s/# IMPORTANT: you need to run setup.sh//g" swandive.ini > TMPFILE && mv TMPFILE swandive.ini
 }
 
 #install_xenadu
