@@ -46,7 +46,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     2. Pick a new `machine_key`, `user_name`, and `user_key`.  The two keys should be random, so the following perl one-liner may be useful in creating new passwords for you.
 
     ```
-    perl -e '@c=(48..57,65..90,97..122);foreach $i (1..32){$p.=chr($c[rand(@c)]);}print $p;'
+    perl -e '@c=(48..57,65..90,97..122);foreach (1..32){print chr($c[rand(@c)])}'
     ```
 
     3. You probably don't need to deal with the rest of the settings, unless you need to change how your VPN allocates IP addresses.
