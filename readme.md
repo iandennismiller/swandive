@@ -61,17 +61,13 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     ```
     ./swandive.py --template swandive.ini
-    mv tmpl_files files
-    mv files/swandive.py .
-    chmod 755 swandive.py
+    mv tmpl_files files && mv files/swandive.py . && chmod 755 swandive.py
     ```
 
     Now our system definition is stored in the dirctory `files`.  The following commands will deploy Swandive to the machine instance.
 
     ```
-    ./swandive.py --apt
-    ./swandive.py --build
-    ./swandive.py --deploy
+    ./swandive.py --apt && ./swandive.py --build && ./swandive.py --deploy
     ```
 
 0. Reboot the machine instance
@@ -79,9 +75,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     Alternatively, log on to your instance and restart ipsec, pppd-dns, and xl2tpd:
 
     ```
-    /etc/init.d/ipsec restart
-    /etc/init.d/pppd-dns restart
-    /etc/init.d/xl2tpd restart
+    /etc/init.d/ipsec restart && /etc/init.d/pppd-dns restart && /etc/init.d/xl2tpd restart
     ```
 
 0. Done
