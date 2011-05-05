@@ -12,8 +12,19 @@ function install_xenadu() {
     echo "switch to Xenadu directory"
     cd iandennismiller-xenadu*
 
-    echo "going to run 'sudo python setup.py install'"
-    sudo python setup.py install
+    echo -n "Do you need to use 'sudo' to install python modules (y/n)?"
+    read sudo_yes
+
+    if [ "$sudo_yes" == "y" ]; then
+        echo "going to run 'sudo python setup.py install'"
+        echo "FYI: 'sudo' may prompt you for your password"
+        sudo python setup.py install
+    fi
+
+    if [ "$sudo_yes" != "y" ]; then
+        echo "going to run 'python setup.py install'"
+        python setup.py install
+    fi
 
     echo "cleaning up"
     cd ..
@@ -41,7 +52,7 @@ if [ "$xenadu_yes" == "y" ]; then
     install_xenadu
 fi
 
-INITIALIZED=`grep IMPORTANT swandive.ini`
+INITIALIZED=`grep __MACHINE_KEY__ swandive.ini`
 if [ "$INITIALIZED" != "" ]; then
     generate_keys
 fi

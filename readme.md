@@ -14,7 +14,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Download Swandive to your local machine
 
-    This will automatically install Xenadu, which is required for Swandive to work.
+    This will automatically install Xenadu, which is required for Swandive to work.  setup.sh will also generate random passwords that will be used later in the installation.
 
     ```
     curl -L https://github.com/iandennismiller/swandive/tarball/master -o swandive.tgz
@@ -25,7 +25,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Launch an EC2 instance of `ami-3e02f257`, and determine its `Elastic IP` and `Private IP address`
 
-    If you need a primer on launching an EC2 machine instance, read the appendix entry "How to prepare an EC2 machine instance".
+    If you need a primer on launching an EC2 machine instance, read the appendix entry "How to prepare an EC2 machine instance", which is at the end of this readme.  Once you have launched an EC2 instance, then do the following:
 
     1. Go to the EC2 console: https://console.aws.amazon.com/ec2/home
 
@@ -39,7 +39,19 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Edit `swandive.ini` to set your IP addresses
 
-    Change `public_ip` (this is Elastic IP) and `private_ip` to match your instance.  Also, take note of `machine_key`, `user_key`, and `user_name`; your VPN client will use these strings to connect with the VPN server.  You should see long, random keys in swandive.ini, but if you instead see _USER_KEY_, then be sure to run setup.sh which will generate random keys for you.
+    swandive.ini is one of the files included with the swandive distribution.  Change `public_ip` (this is Elastic IP) and `private_ip` to match your instance.
+
+    ```
+    [xenadu]
+    # this is the publicly visible VPN server IP address.
+    # if using EC2, this is the "Elastic IP"
+    public_ip = 50.XXX.XXX.XXX
+
+    # this is the private IP address Amazon assigned to your ec2 instance
+    private_ip = 10.XXX.XXX.XXX
+    ```
+
+    Also, take note of `machine_key`, `user_key`, and `user_name`; your VPN client will use these strings to connect with the VPN server.  You should see long, random keys in swandive.ini, but if you instead see _USER_KEY_, then be sure to run setup.sh which will generate random keys for you.
 
     Unless you need to change how your VPN allocates IP addresses, you don't need to deal with the rest of the settings.
 
@@ -195,3 +207,13 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 0. [Ubuntu](http://ubuntu.com)/[Debian](http://debian.org)
 
     Swandive should run equally well on a Debian- or Ubuntu-based machine instance.  Why use Ubuntu 10.04?  This is what Ubuntu calls a "long-term support" release, which means they will keep fixing 10.04 bugs through April 2015.  This is important for Swandive because it means the current instructions (as of May 2011) will work for the next 4 years.
+
+# License
+
+Copyright (C) 2011 by Ian Dennis Miller
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
