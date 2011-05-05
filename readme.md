@@ -23,11 +23,17 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     python setup.py install
     ```
 
-2. Next, log in to a fresh machine instance.
+2. Log in to a freshly configured EC2 machine instance, and determine its internal EC2 IP address.
 
     If you need a primer on launching an EC2 machine instance, check out the appendix.
 
+    First, we need to figure out our internet IP address is:
 
+    ```
+    ifconfig eth0
+    ```
+
+3. Edit `swandive.ini` 
 
 # appendix
 
@@ -45,14 +51,9 @@ ssh -i id_rsa-gsg-keypair ubuntu@swandive.example.com
 sudo su -
 passwd ubuntu
 passwd
-apt-get update
-apt-get upgrade -y
+apt-get update && apt-get upgrade -y
 dpkg-reconfigure tzdata
-initctl stop tty2
-initctl stop tty3
-initctl stop tty4
-initctl stop tty5
-initctl stop tty6
+initctl stop tty2 && initctl stop tty3 && initctl stop tty4 && initctl stop tty5 && initctl stop tty6
 rm /etc/init/tty2.conf /etc/init/tty3.conf /etc/init/tty4.conf /etc/init/tty5.conf /etc/init/tty6.conf
 reboot now
 ```
