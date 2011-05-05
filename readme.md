@@ -12,17 +12,15 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 ## installation
 
-0. Download and install Xenadu and Swandive
+0. Download Swandive
 
     Do this on your local machine, not on the cloud machine.
 
     ```
-    curl -L https://github.com/iandennismiller/xenadu/tarball/master -o xenadu.tgz
     curl -L https://github.com/iandennismiller/swandive/tarball/master -o swandive.tgz
-    tar xvfz xenadu.tgz
     tar xvfz swandive.tgz
-    cd iandennismiller-xenadu*
-    python setup.py install
+    cd iandennismiller-swandive*
+    ./setup.sh
     ```
 
 0. Launch an EC2 instance of `ami-3e02f257`, and determine its `Elastic IP` and `Private IP address`
@@ -33,39 +31,30 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     3. Click on the instance you just created
 
-    4. Find the `Elastic IP` and `Private IP address`, like in the image below:
+    4. Find the `Elastic IP` and `Private IP address`, like the image below:
 
     ![Alt text](/path/to/img.jpg)
 
     If you need a primer on launching an EC2 machine instance, check out the appendix.
 
-0. Edit `swandive.ini` to set your IP addresses and authentication info
+0. Edit `swandive.ini` to set your IP addresses
 
-    1. Change `public_ip` (Elastic IP) and `private_ip` (Private IP address) to match your instance.
+    Change `public_ip` (this is Elastic IP) and `private_ip` to match your instance.  Unless you need to change how your VPN allocates IP addresses, you don't need to deal with the rest of the settings.
 
-    2. Pick a new `machine_key`, `user_name`, and `user_key`.  The two keys should be random, so the following perl one-liner may be useful in creating new passwords for you.
+0. Install Swandive
 
-    ```
-    perl -e '@c=(48..57,65..90,97..122);foreach (1..32){print chr($c[rand(@c)])}'
-    ```
-
-    3. You probably don't need to deal with the rest of the settings, unless you need to change how your VPN allocates IP addresses.
-
-0. Edit `swandive.py` to set the ssh address
-
-    Change `swandive.example.com` to the `public_ip` address of your instance:
-
-    ```python
-    env = { 'ssh': { "user": "root", "address": "swandive.example.com" } }
-    ```
-
-0. Install Swandive on the EC2 instance
-
-    Swandive is really just a Xenadu system definition, which is why we needed to install Xenadu first.
+    Swandive ships as a Xenadu template, which Xenadu must unpack into a system definition.
 
     ```
     ./swandive.py --template swandive.ini
     mv tmpl_files files
+    mv files/swandive.py .
+    chmod 755 swandive.py
+    ```
+
+    Now our system definition is stored in `files`.  The following commands will deploy Swandive to the machine instance.
+
+    ```
     ./swandive.py --apt
     ./swandive.py --build
     ./swandive.py --deploy
@@ -83,13 +72,13 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Done
 
-    Swandive is set up, so configure your clients and start using your new VPN.  The `machine key` is stored in `files/ipsec.secrets`, and the user account information is stored in `files/chap-secrets`.  You will need these to log in.
+    Swandive is set up, so configure your clients and start using your new VPN.  You can find the 
 
 ## Authentication
 
 0. Why use a pre-shared key instead of SSL certificates?
 
-    Using a "pre-shared key" is basically the same as using a password.  Even though SSL certificates would provide better resistance against attack, SSL certificates are not supported by all VPN clients.  As of May 4, 2011 iOS does not support this, and since I want something that would be compatible with the iPhone, there was no choice but to go with pre-shared key.
+    Using a "pre-shared key" is basically the same as using a password.  Even though SSL certificates would provide better resistance against attack, SSL certificates are not supported by all VPN clients.  As of May 4, 2011 iOS does not support SSL certificates for L2TP/IPsec, and since I want something that would be compatible with the iPhone, there was no choice but to go with pre-shared key.
 
 0. What is my secret key?
 
@@ -99,7 +88,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     One key is called something like `machine key`, `system secret`, or `machine password`, and it is used to make initial contact with the VPN server.  Everyone who contacts this VPN will use the same machine key, in the same way that everyone enters the same password for a wifi access point.  This key is stored in `files/ipsec.secrets`.
 
-    After connecting, the VPN server requires you to authenticate with a username and password.  This is the second key, which is sometimes called a 'user key', 'user secret', 'user password'...  Each user who connects to the VPN will have their own username and password, which are stored in `files/chap-secrets`.
+    After connecting, the VPN server requires each user to authenticate with a username and password.  This is sometimes called a 'user key', 'user secret', 'user password'...  Each user who connects to the VPN will have their own username and password, which are stored in `files/chap-secrets`.
 
 # appendix
 
