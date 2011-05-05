@@ -120,29 +120,78 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Now perform a little housekeeping on your new EC2 instance
 
-    Connect to your new instance.  If SSH is properly configured, then you will be greeted with a normal command prompt.
+    0. Connect to your new instance.  
 
-    ```
-    ssh ubuntu@$ELASTIC_IP
-    ```
+        If SSH is properly configured, then you will be greeted with a normal command prompt.
 
-    The following steps configure root SSH access, set some passwords, update the system, configure the timezone, and remove some unneeded processes.
+        ```
+        ssh ubuntu@$ELASTIC_IP
+        ```
 
-    ```
-    sudo su -
-    cp ~ubuntu/.ssh/authorized_keys ~/.ssh/authorized_keys
-    chown root:root ~/.ssh/authorized_keys
-    perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
-    passwd ubuntu
-    perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
-    passwd
-    apt-get update && apt-get upgrade -y
-    dpkg-reconfigure tzdata
-    initctl stop tty2 && initctl stop tty3 && initctl stop tty4 && initctl stop tty5 && initctl stop tty6
-    rm /etc/init/tty2.conf /etc/init/tty3.conf /etc/init/tty4.conf /etc/init/tty5.conf /etc/init/tty6.conf
-    reboot now
-    ```
+    0. Configure root account for public key login
+
+        Xenadu requires root access so that it can set permissions when it uploads files.
+
+        ```
+        sudo su -
+        cp ~ubuntu/.ssh/authorized_keys ~/.ssh/authorized_keys
+        chown root:root ~/.ssh/authorized_keys
+        ```
+
+    0. Generate new passwords for ubuntu and root account.
+
+        The perl script just generates a random string, which you will need to copy into the password field.
+
+        ```
+        perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
+        passwd ubuntu
+        perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
+        passwd
+        ```
+
+    0. Update the system
+
+        ```
+        apt-get update && apt-get upgrade -y
+        ```
+
+    0. Configure the timezone
+
+        ```
+        dpkg-reconfigure tzdata
+        ```
+
+    0. Disable a few unnecessary processes
+
+        ```
+        initctl stop tty2 && initctl stop tty3 && initctl stop tty4 && initctl stop tty5 && initctl stop tty6
+        rm /etc/init/tty2.conf /etc/init/tty3.conf /etc/init/tty4.conf /etc/init/tty5.conf /etc/init/tty6.conf
+        ```
+
+    0. Reboot
+
+        ```
+        reboot now
+        ```
 
 0. Done
 
     At this point, you have a fully configured EC2 instance that is ready for Swandive.
+
+## What software does Swandive use?
+
+0. Xenadu
+
+    Xenadu is a system configuration tool, and it happens to be a really easy way to package something like Swandive.  Xenadu transforms a template into a system definition, which Xenadu then deploys to a remote system.  It's great for making servers in a web app setting, since it is trivial to make duplicates of an application server or web server with Xenadu.
+
+0. Openswan
+
+    Among all the IPsec implementations out there (including racoon, freeswan, strongswan, and others) Openswan was the first one I could get working with NAT-T, which is a critical requirement for EC2.  NAT-T is required since EC2 filters all IP traffic except TCP, UDP, and ICMP, but vanilla IPsec/L2TP specifies the use of ESP and AH which are, at the moment, slightly unusual IP traffic.  For example, most consumer routers won't know how to forward AH and ESP packets, so it's a good thing NAT-T finally works (because it avoids the problem).
+
+0. xl2tpd and pppd
+
+    IPsec creates a secure channel between the VPN server and VPN client, but then L2TP sets up a tunnel that makes your client visible to the VPN server's network.  This step is similar to plugging a network cable into your client machine, and connecting it to the same network as the VPN server.  pppd is responsible for actually assigning your VPN client an IP address.
+
+0. Ubuntu/Debian
+
+    Swandive should run equally well on a Debian- or Ubuntu-based machine instance.
