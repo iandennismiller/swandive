@@ -116,10 +116,17 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     mv ~/Downloads/ec2identity.pem ~/.ssh && chmod 400 ~/.ssh/ec2identity.pem
     ELASTIC_IP=50.17.224.58
     echo -e "\nHost $ELASTIC_IP\n  IdentityFile ~/.ssh/ec2identity.pem\n" >> ~/.ssh/config
-    ssh ubuntu@$ELASTIC_IP
     ```
 
 0. Now perform a little housekeeping on your new EC2 instance
+
+    Connect to your new instance.  If SSH is properly configured, then you will be greeted with a normal command prompt.
+
+    ```
+    ssh ubuntu@$ELASTIC_IP
+    ```
+
+    The following steps configure root SSH access, set some passwords, update the system, configure the timezone, and remote some unneeded processes.
 
     ```
     sudo su -
