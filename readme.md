@@ -122,15 +122,13 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     0. Connect to your new instance.  
 
-        If SSH is properly configured, then you will be greeted with a normal command prompt.
-
         ```
         ssh ubuntu@$ELASTIC_IP
         ```
 
-    0. Configure root account for public key login
+        If SSH is properly configured, then you will be greeted with a normal command prompt.
 
-        Xenadu requires root access so that it can set permissions when it uploads files.
+    0. Configure root account for public key login
 
         ```
         sudo su -
@@ -138,9 +136,9 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
         chown root:root ~/.ssh/authorized_keys
         ```
 
-    0. Generate new passwords for ubuntu and root account.
+        Xenadu requires root access so that it can set permissions when it uploads files.
 
-        The perl script just generates a random string, which you will need to copy into the password field.
+    0. Generate new passwords for ubuntu and root account
 
         ```
         perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
@@ -148,6 +146,8 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
         perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
         passwd
         ```
+
+        The perl script generates a random string, which you will need to copy into the password field.
 
     0. Update the system
 
@@ -180,18 +180,18 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 ## What software does Swandive use?
 
-0. Xenadu
+0. [Xenadu](https://github.com/iandennismiller/xenadu)
 
     Xenadu is a system configuration tool, and it happens to be a really easy way to package something like Swandive.  Xenadu transforms a template into a system definition, which Xenadu then deploys to a remote system.  It's great for making servers in a web app setting, since it is trivial to make duplicates of an application server or web server with Xenadu.
 
-0. Openswan
+0. [Openswan](http://openswan.org)
 
     Among all the IPsec implementations out there (including racoon, freeswan, strongswan, and others) Openswan was the first one I could get working with NAT-T, which is a critical requirement for EC2.  NAT-T is required since EC2 filters all IP traffic except TCP, UDP, and ICMP, but vanilla IPsec/L2TP specifies the use of ESP and AH which are, at the moment, slightly unusual IP traffic.  For example, most consumer routers won't know how to forward AH and ESP packets, so it's a good thing NAT-T finally works (because it avoids the problem).
 
-0. xl2tpd and pppd
+0. [xl2tpd](http://www.xelerance.com/services/software/xl2tpd/) and pppd
 
     IPsec creates a secure channel between the VPN server and VPN client, but then L2TP sets up a tunnel that makes your client visible to the VPN server's network.  This step is similar to plugging a network cable into your client machine, and connecting it to the same network as the VPN server.  pppd is responsible for actually assigning your VPN client an IP address.
 
-0. Ubuntu/Debian
+0. [Ubuntu](http://ubuntu.com)/[Debian](http://debian.org)
 
-    Swandive should run equally well on a Debian- or Ubuntu-based machine instance.
+    Swandive should run equally well on a Debian- or Ubuntu-based machine instance.  Why use Ubuntu 10.04?  This is what Ubuntu calls a "long-term support" release, which means they will keep fixing 10.04 bugs through April 2015.  This is important for Swandive because it means the current instructions (as of May 2011) will work for the next 4 years.
