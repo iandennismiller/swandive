@@ -25,6 +25,8 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Launch an EC2 instance of `ami-3e02f257`, and determine its `Elastic IP` and `Private IP address`
 
+    If you need a primer on launching an EC2 machine instance, read the appendix entry "How to prepare an EC2 machine instance".
+
     1. Go to the EC2 console: https://console.aws.amazon.com/ec2/home
 
     2. Click Instances, to get a list of all your instances
@@ -34,8 +36,6 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     4. Find the `Elastic IP` and `Private IP address`, like the image below:
 
     ![EC2 example demonstrating where the IP addresses are](https://github.com/iandennismiller/swandive/raw/master/doc/ec2_example.png)
-
-    If you need a primer on launching an EC2 machine instance, check out the appendix.
 
 0. Edit `swandive.ini` to set your IP addresses
 
@@ -114,7 +114,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     ```
     mv ~/Downloads/ec2identity.pem ~/.ssh && chmod 400 ~/.ssh/ec2identity.pem
-    ELASTIC_IP=50.XX.XX.XX
+    export ELASTIC_IP=50.XX.XX.XX
     echo -e "\nHost $ELASTIC_IP\n  IdentityFile ~/.ssh/ec2identity.pem\n" >> ~/.ssh/config
     ```
 
@@ -176,7 +176,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Done
 
-    At this point, you have a fully configured EC2 instance that is ready for Swandive.
+    At this point, you have a fully configured EC2 instance that is ready for Swandive.  You can go back to the Swandive installation process now.
 
 ## What software does Swandive use?
 
