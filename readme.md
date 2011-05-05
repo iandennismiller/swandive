@@ -1,6 +1,6 @@
 # introduction
 
-I want to encrypt my Internet traffic when using an unprotected wifi access point, and you probably do too.  The most widely supported, secure way to achieve this is with L2TP and IPsec.  I want to run this on a virtual machine somewhere in the cloud, like on an Amazon EC2 micro instance (approximately $16/month).  *Swandive creates a secure VPN transport in the cloud, letting me encrypt my laptop and iPod touch on the road.*
+I want to encrypt my Internet traffic when using an unprotected wifi access point, and you probably do too.  The most widely supported, secure way to achieve this is with L2TP and IPsec.  I want to run this on a virtual machine somewhere in the cloud, like on an Amazon EC2 micro instance (approximately $16/month).  **Swandive creates a secure VPN transport in the cloud, letting me encrypt my laptop and iPod touch on the road.**
 
 # requirements
 
@@ -100,17 +100,34 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 ## How to prepare an EC2 machine instance
 
-For a fantastic overview of this process, be sure to read .
+0. Watch this video to learn how to create an EC2 instance based on `ami-3e02f257`
 
-1. configure the new instance
+    __VIDEO LINK HERE__
+
+    ami-3e02f257 is based on Ubuntu 10.04, and is suitable for Swandive with an EC2 micro instance.  Just a reminder: an EC2 micro instance will cost at least $16/month, if you use the "on demand" pricing.
+
+    This video is based on steps 1-10 of Stratum Security's fantastic tutorial here: http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/
+
+0. Set up SSH on your local machine
+
+    Both Amazon EC2 and Xenadu depend on SSH public key login, which is why we created a keypair using the EC2 console. This step will set up your SSH client to automatically use `ec2identity.pem` when connecting to your Swandive host.
 
     ```
-    ssh -i id_rsa-gsg-keypair ubuntu@swandive.example.com
+    mv ~/Downloads/ec2identity.pem ~/.ssh && chmod 400 ~/.ssh/ec2identity.pem
+    ELASTIC_IP=50.17.224.58
+    echo -e "\nHost $ELASTIC_IP\n  IdentityFile ~/.ssh/ec2identity.pem\n" >> ~/.ssh/config
+    ssh ubuntu@$ELASTIC_IP
     ```
+
+0. Now perform a little housekeeping on your new EC2 instance
 
     ```
     sudo su -
+    cp ~ubuntu/.ssh/authorized_keys ~/.ssh/authorized_keys
+    chown root:root ~/.ssh/authorized_keys
+    perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
     passwd ubuntu
+    perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
     passwd
     apt-get update && apt-get upgrade -y
     dpkg-reconfigure tzdata
@@ -119,6 +136,6 @@ For a fantastic overview of this process, be sure to read .
     reboot now
     ```
 
-2. add public key to /root/.ssh
+0. Done
 
-    ...to be continued
+    At this point, you have a fully configured EC2 instance that is ready for Swandive.
