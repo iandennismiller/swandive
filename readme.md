@@ -61,7 +61,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     ```
     ./swandive.py --template swandive.ini
-    mv tmpl_files files && mv files/swandive.py . && chmod 755 swandive.py
+    mv tmpl_files files && mv files/swandive.py ./swandive.py && chmod 755 ./swandive.py
     ```
 
     Now our system definition is stored in the dirctory `files`.  The following commands will deploy Swandive to the machine instance.
@@ -119,8 +119,8 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     Both Amazon EC2 and Xenadu depend on SSH public key login, which is why we created a keypair using the EC2 console. This step will set up your SSH client to automatically use `ec2identity.pem` when connecting to your Swandive host.
 
     ```
-    mv ~/Downloads/ec2identity.pem ~/.ssh && chmod 400 ~/.ssh/ec2identity.pem
     export ELASTIC_IP=50.XX.XX.XX
+    mv ~/Downloads/ec2identity.pem ~/.ssh && chmod 400 ~/.ssh/ec2identity.pem
     echo -e "\nHost $ELASTIC_IP\n  IdentityFile ~/.ssh/ec2identity.pem\n" >> ~/.ssh/config
     ```
 
