@@ -18,7 +18,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     ```
     curl -s -L https://github.com/iandennismiller/swandive/tarball/master -o swandive.tgz
-    tar xvfz swandive.tgz
+    tar xfz swandive.tgz
     cd iandennismiller-swandive*
     ./setup.sh
     ```

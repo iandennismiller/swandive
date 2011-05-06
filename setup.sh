@@ -7,7 +7,7 @@ function install_xenadu() {
 
     echo "downloading Xenadu..."
     curl -s -L https://github.com/iandennismiller/xenadu/tarball/master -o xenadu.tgz
-    tar xvfz xenadu.tgz
+    tar xfz xenadu.tgz
 
     echo "switch to Xenadu directory"
     cd iandennismiller-xenadu*
