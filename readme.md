@@ -106,9 +106,9 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 ## How to prepare an EC2 machine instance
 
-0. Watch this video to learn how to create an EC2 instance based on `ami-3e02f257`
+0. [Watch this video](http://youtu.be/qzGa9f51IOo?hd=1) to learn how to create an EC2 instance based on `ami-3e02f257`
 
-    __VIDEO LINK HERE__
+    http://youtu.be/qzGa9f51IOo?hd=1
 
     ami-3e02f257 is based on Ubuntu 10.04, and is suitable for Swandive with an EC2 micro instance.  Just a reminder: an EC2 micro instance will cost at least $16/month, if you use the "on demand" pricing.
 
