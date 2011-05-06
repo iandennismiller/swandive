@@ -72,6 +72,8 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Ensure ipsec will start during boot, then reboot
 
+    Here, replace $ELASTIC_IP with `public_ip`, from `swandive.ini`.  If you created this instance using the example in the appendix, then $ELASTIC_IP is already set for you.
+
     ```
     ssh root@$ELASTIC_IP
     ```
