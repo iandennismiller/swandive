@@ -87,6 +87,41 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 # appendix
 
+## Configuring a VPN client
+
+The following steps demonstrate configuring OS X for use with Swandive.  This process is very similar to iPhone/iPod/iPad VPN configuration.  The following `swandive.ini` settings will be referred to in this example:
+
+```
+[xenadu]
+# this is the publicly visible VPN server IP address.
+# if using EC2, this is the "Elastic IP"
+public_ip = 50.0.0.1
+
+# this is the private IP address Amazon assigned to your ec2 instance
+private_ip = 10.200.100.1
+
+# authentication
+user_name = vpnuser
+user_key = MChw9YbuAnMJHzMlS8GIX1WsJnaNb7S9
+machine_key = Dc9QF8oTOc3RBYbxfN8Avoz8AVxAOFeN
+```
+
+0. Launch Network Settings, and create a VPN interface
+
+    Click the plus, in the lower-left corner, 
+
+    ![VPN configuration - create VPN interface](https://github.com/iandennismiller/swandive/raw/master/doc/osx vpn config - create vpn interface.png)
+
+0. Configure Swandive VPN `server address` and `account name`
+
+    ![VPN configuration - server address and account](https://github.com/iandennismiller/swandive/raw/master/doc/osx vpn config - server address and account.png)
+
+0. Click "Authentication Settings"
+
+    ![VPN configuration - passwords](https://github.com/iandennismiller/swandive/raw/master/doc/osx vpn config - user password and machine secret.png)
+
+0. Connect
+
 ## Authentication
 
 0. What is my secret key?
