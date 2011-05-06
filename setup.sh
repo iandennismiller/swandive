@@ -27,7 +27,7 @@ function install_xenadu() {
     fi
 
     echo "cleaning up"
-    cd ..
+    cd ../..
     rm -rf tmp_xenadu
     echo "done"
 }
