@@ -70,12 +70,15 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     ./swandive.py --apt -v && ./swandive.py --build && ./swandive.py --deploy
     ```
 
-0. Reboot the machine instance
-
-    Alternatively, log on to your instance and restart ipsec, pppd-dns, and xl2tpd:
+0. Ensure ipsec will start during boot, then reboot
 
     ```
-    /etc/init.d/ipsec restart && /etc/init.d/pppd-dns restart && /etc/init.d/xl2tpd restart
+    ssh root@$ELASTIC_IP
+    ```
+
+    ```
+    update-rc.d -f ipsec remove && update-rc.d -f ipsec defaults
+    reboot now
     ```
 
 0. Done
