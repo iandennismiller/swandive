@@ -114,7 +114,7 @@ machine_key = Dc9QF8oTOc3RBYbxfN8Avoz8AVxAOFeN
 
 0. Configure Swandive VPN Server Address and Account Name
 
-    Now look at `swandive.ini` and copy the `public_ip` into "Server Address."  The "Account Name" is the `user_name`.
+    Now look at `swandive.ini` and copy the `public_ip` into "Server Address." The "Account Name" is the `user_name`.  
 
     ![VPN configuration - server address and account](https://github.com/iandennismiller/swandive/raw/master/doc/osx vpn config - server address and account.png)
 
