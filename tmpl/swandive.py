@@ -6,9 +6,6 @@ mapping = [
     ['/etc/network/if-up.d/iptables', "iptables", Perm.root_755],
     ['/etc/iptables.conf', "iptables.conf", Perm.root_644],
 
-    # openvpn
-    ["/etc/openvpn/server.conf", "openvpn.conf", Perm.root_644],
-
     # openswan
     ['/etc/ipsec.conf', "vpn/ipsec.conf", Perm.root_644],
     ['/etc/ipsec.secrets', "vpn/ipsec.secrets", Perm.root_600],

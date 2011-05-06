@@ -67,7 +67,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     Now our system definition is stored in the dirctory `files`.  The following commands will deploy Swandive to the machine instance.
 
     ```
-    ./swandive.py --apt && ./swandive.py --build && ./swandive.py --deploy
+    ./swandive.py --apt -v && ./swandive.py --build && ./swandive.py --deploy
     ```
 
 0. Reboot the machine instance
