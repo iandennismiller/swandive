@@ -17,7 +17,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     This will automatically install Xenadu, which is required for Swandive to work.  setup.sh will also generate random passwords that will be used later in the installation.
 
     ```
-    curl -L https://github.com/iandennismiller/swandive/tarball/master -o swandive.tgz
+    curl -s -L https://github.com/iandennismiller/swandive/tarball/master -o swandive.tgz
     tar xvfz swandive.tgz
     cd iandennismiller-swandive*
     ./setup.sh

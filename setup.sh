@@ -1,12 +1,12 @@
 #!/bin/bash
 
 function install_xenadu() {
-    echo "installing Xenadu"
+    echo "start Xenadu"
     mkdir tmp_xenadu
     cd tmp_xenadu
 
-    echo "downloading Xenadu"
-    curl -L https://github.com/iandennismiller/xenadu/tarball/master -o xenadu.tgz
+    echo "downloading Xenadu..."
+    curl -s -L https://github.com/iandennismiller/xenadu/tarball/master -o xenadu.tgz
     tar xvfz xenadu.tgz
 
     echo "switch to Xenadu directory"
@@ -56,3 +56,6 @@ INITIALIZED=`grep __MACHINE_KEY__ swandive.ini`
 if [ "$INITIALIZED" != "" ]; then
     generate_keys
 fi
+
+echo "Swandive has been initialized."
+echo "Please refer to https://github.com/iandennismiller/swandive for next steps."
