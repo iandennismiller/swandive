@@ -74,7 +74,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. **Ensure ipsec will start during boot, then reboot**
 
-    Here, replace $ELASTIC_IP with `public_ip`, from `swandive.ini`.  If you created this instance using the example in the appendix, then $ELASTIC_IP is already set for you.
+    Here, replace $ELASTIC_IP with `public_ip`, from `swandive.ini`.  If you created this instance using the example in ["How to prepare an EC2 machine instance"](https://github.com/iandennismiller/swandive/blob/master/doc/ec2_howto.md), then $ELASTIC_IP is already set for you.
 
     ```
     ssh root@$ELASTIC_IP "update-rc.d -f ipsec remove; update-rc.d -f ipsec defaults; reboot now"
@@ -82,7 +82,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. **Done**
 
-    Swandive is set up, so configure your clients and start using your new VPN.  You can find the authentication (i.e. login) information in `swandive.ini`.  For more information about authentication, read ["Authentication"](https://github.com/iandennismiller/swandive/blob/master/doc/authentication.md).
+    Swandive is set up, so configure your clients and start using your new VPN!  You can find the authentication (i.e. login) information in `swandive.ini`.  For more information about authentication, read ["Authentication"](https://github.com/iandennismiller/swandive/blob/master/doc/authentication.md).
 
     To configure an OS X VPN client, read ["Configuring the OS X VPN Client"](https://github.com/iandennismiller/swandive/blob/master/doc/osx_config.md) (which is also useful for configuring an iPod/iPad/iPhone.)
 
