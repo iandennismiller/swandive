@@ -12,7 +12,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 # installation
 
-0. Download Swandive to your local machine
+0. *Download Swandive to your local machine*
 
     This will automatically install Xenadu, which is required for Swandive to work.  setup.sh will also generate random passwords that will be used later in the installation.
 
@@ -23,7 +23,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     ./setup.sh
     ```
 
-0. Launch an EC2 instance of `ami-3e02f257`, and determine its `Elastic IP` and `Private IP address`
+0. *Launch an EC2 instance of `ami-3e02f257`, and determine its `Elastic IP` and `Private IP address`*
 
     If you need a primer on launching an EC2 machine instance, read [How to prepare an EC2 machine instance](https://github.com/iandennismiller/swandive/blob/master/doc/ec2_howto.md).  This document also explains how to configure an EC2 security policy, so if you're having trouble at any point with the Swandive installation, you should review this EC2 setup document.
 
