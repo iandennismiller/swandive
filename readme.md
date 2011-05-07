@@ -35,7 +35,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     4. Find the `Elastic IP` and `Private IP address`, like the image below:
 
-    ![EC2 example demonstrating where the IP addresses are](https://github.com/iandennismiller/swandive/raw/master/doc/ec2_example.png)
+    ![EC2 example demonstrating where the IP addresses are](https://github.com/iandennismiller/swandive/raw/master/doc/images/ec2_example.png)
 
 0. Edit `swandive.ini` to set your IP addresses
 
@@ -107,13 +107,13 @@ machine_key = Dc9QF8oTOc3RBYbxfN8Avoz8AVxAOFeN
 
     Click the plus in the lower-left corner, select "VPN" as Interface, and as VPN Type select "L2TP over IPSec".  Name this service "Swandive".
 
-    ![VPN configuration - create VPN interface](https://github.com/iandennismiller/swandive/raw/master/doc/osx vpn config - create vpn interface.png)
+    ![VPN configuration - create VPN interface](https://github.com/iandennismiller/swandive/raw/master/doc/images/osx vpn config - create vpn interface.png)
 
 0. Configure Swandive VPN Server Address and Account Name
 
     Now look at `swandive.ini` and copy the `public_ip` into "Server Address." The "Account Name" is the `user_name`.  
 
-    ![VPN configuration - server address and account](https://github.com/iandennismiller/swandive/raw/master/doc/osx vpn config - server address and account.png)
+    ![VPN configuration - server address and account](https://github.com/iandennismiller/swandive/raw/master/doc/images/osx vpn config - server address and account.png)
 
 0. Click "Authentication Settings"
 
@@ -121,13 +121,13 @@ machine_key = Dc9QF8oTOc3RBYbxfN8Avoz8AVxAOFeN
 
     0. Under Machine Authentication, click "Shared Secret" and copy `machine_key` into this field.
 
-    ![VPN configuration - passwords](https://github.com/iandennismiller/swandive/raw/master/doc/osx vpn config - user password and machine secret.png)
+    ![VPN configuration - passwords](https://github.com/iandennismiller/swandive/raw/master/doc/images/osx vpn config - user password and machine secret.png)
 
 0. Click "Advanced" and enable "send all traffic over VPN connection"
 
     This critical step will make sure to encrypt all of the traffic coming out of your machine.  If you forget this step, then the VPN actually won't do anything useful for you at all!
 
-    ![VPN configuration - passwords](https://github.com/iandennismiller/swandive/raw/master/doc/osx vpn config - send all traffic.png)
+    ![VPN configuration - passwords](https://github.com/iandennismiller/swandive/raw/master/doc/images/osx vpn config - send all traffic.png)
 
 0. Connect
 
