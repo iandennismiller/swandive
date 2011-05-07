@@ -23,7 +23,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     ./setup.sh
     ```
 
-0. *Launch an EC2 instance of `ami-3e02f257`, and determine its `Elastic IP` and `Private IP address`*
+0. **Launch an EC2 instance of `ami-3e02f257`, and determine its `Elastic IP` and `Private IP address`**
 
     If you need a primer on launching an EC2 machine instance, read [How to prepare an EC2 machine instance](https://github.com/iandennismiller/swandive/blob/master/doc/ec2_howto.md).  This document also explains how to configure an EC2 security policy, so if you're having trouble at any point with the Swandive installation, you should review this EC2 setup document.
 
@@ -39,7 +39,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     ![EC2 example demonstrating where the IP addresses are](https://github.com/iandennismiller/swandive/raw/master/doc/images/ec2_example.png)
 
-0. Edit `swandive.ini` to set your IP addresses
+0. **Edit `swandive.ini` to set your IP addresses**
 
     swandive.ini is one of the files included with the swandive distribution.  Change `public_ip` (this is Elastic IP) and `private_ip` to match your instance.
 
@@ -57,7 +57,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
     Unless you need to change how your VPN allocates IP addresses, you don't need to deal with the rest of the settings.
 
-0. Install Swandive
+0. **Install Swandive**
 
     Swandive is a Xenadu template, which Xenadu must unpack into a system definition.
 
@@ -72,7 +72,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     ./swandive.py --apt -v && ./swandive.py --build && ./swandive.py --deploy
     ```
 
-0. Ensure ipsec will start during boot, then reboot
+0. **Ensure ipsec will start during boot, then reboot**
 
     Here, replace $ELASTIC_IP with `public_ip`, from `swandive.ini`.  If you created this instance using the example in the appendix, then $ELASTIC_IP is already set for you.
 
@@ -80,7 +80,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
     ssh root@$ELASTIC_IP "update-rc.d -f ipsec remove; update-rc.d -f ipsec defaults; reboot now"
     ```
 
-0. Done
+0. **Done**
 
     Swandive is set up, so configure your clients and start using your new VPN.  You can find the authentication (i.e. login) information in `swandive.ini`.  For more information about authentication, read ["Authentication"](https://github.com/iandennismiller/swandive/blob/master/doc/authentication.md).
 
