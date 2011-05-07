@@ -12,7 +12,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 # installation
 
-0. *Download Swandive to your local machine*
+0. **Download Swandive to your local machine**
 
     This will automatically install Xenadu, which is required for Swandive to work.  setup.sh will also generate random passwords that will be used later in the installation.
 
