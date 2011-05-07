@@ -1,4 +1,4 @@
-# How to prepare an EC2 machine instance
+# How to prepare an EC2 machine instance for Swandive
 
 0. [Watch this video](http://youtu.be/qzGa9f51IOo?hd=1) to learn how to create an EC2 instance based on `ami-3e02f257`
 

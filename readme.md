@@ -25,7 +25,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. **Launch an EC2 instance of `ami-3e02f257`, and determine its "Elastic IP" and "Private IP address"**
 
-    If you need a primer on launching an EC2 machine instance, read [How to prepare an EC2 machine instance](https://github.com/iandennismiller/swandive/blob/master/doc/ec2_howto.md).  This document also explains how to configure an EC2 security policy, so if you're having trouble at any point with the Swandive installation, you should review this EC2 setup document.
+    If you need a primer on launching an EC2 machine instance, read [How to prepare an EC2 machine instance for Swandive](https://github.com/iandennismiller/swandive/blob/master/doc/ec2_howto.md).  This document also explains how to configure an EC2 security policy, so if you're having trouble at any point with the Swandive installation, you should review this EC2 setup document.
 
     Once you have launched an EC2 instance, then do the following:
 
@@ -74,7 +74,7 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. **Ensure ipsec will start during boot, then reboot**
 
-    Here, replace $ELASTIC_IP with `public_ip`, from `swandive.ini`.  If you created this instance using the example in ["How to prepare an EC2 machine instance"](https://github.com/iandennismiller/swandive/blob/master/doc/ec2_howto.md), then $ELASTIC_IP is already set for you.
+    Here, replace $ELASTIC_IP with `public_ip`, from `swandive.ini`.  If you created this instance using the example in ["How to prepare an EC2 machine instance for Swandive"](https://github.com/iandennismiller/swandive/blob/master/doc/ec2_howto.md), then $ELASTIC_IP is already set for you.
 
     ```
     ssh root@$ELASTIC_IP "update-rc.d -f ipsec remove; update-rc.d -f ipsec defaults; reboot now"
