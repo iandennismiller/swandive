@@ -1,4 +1,4 @@
-## Configuring the OS X VPN client
+# Configuring the OS X VPN client
 
 The following steps demonstrate configuring OS X for use with Swandive, which is very similar to iPhone/iPod/iPad VPN configuration.  The following `swandive.ini` settings will be referred to in this example:
 

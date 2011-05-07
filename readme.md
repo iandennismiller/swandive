@@ -25,7 +25,9 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Launch an EC2 instance of `ami-3e02f257`, and determine its `Elastic IP` and `Private IP address`
 
-    If you need a primer on launching an EC2 machine instance, read the appendix entry "How to prepare an EC2 machine instance", which is at the end of this readme.  Once you have launched an EC2 instance, then do the following:
+    If you need a primer on launching an EC2 machine instance, read [How to prepare an EC2 machine instance](https://github.com/iandennismiller/swandive/blob/master/doc/ec2_howto.md).  This document also explains how to configure an EC2 security policy, so if you're having trouble at any point with the Swandive installation, you should review this EC2 setup document.
+
+    Once you have launched an EC2 instance, then do the following:
 
     1. Go to the EC2 console: https://console.aws.amazon.com/ec2/home
 
@@ -80,158 +82,9 @@ I want to encrypt my Internet traffic when using an unprotected wifi access poin
 
 0. Done
 
-    Swandive is set up, so configure your clients and start using your new VPN.  You can find the authentication (i.e. login) information in `swandive.ini`.
+    Swandive is set up, so configure your clients and start using your new VPN.  You can find the authentication (i.e. login) information in `swandive.ini`.  For more information about authentication, read ["Authentication"](https://github.com/iandennismiller/swandive/blob/master/doc/authentication.md).
 
-# appendix
-
-## Configuring the OS X VPN client
-
-The following steps demonstrate configuring OS X for use with Swandive, which is very similar to iPhone/iPod/iPad VPN configuration.  The following `swandive.ini` settings will be referred to in this example:
-
-```
-[xenadu]
-# this is the publicly visible VPN server IP address.
-# if using EC2, this is the "Elastic IP"
-public_ip = 50.0.0.1
-
-# this is the private IP address Amazon assigned to your ec2 instance
-private_ip = 10.0.0.1
-
-# authentication
-user_name = vpnuser
-user_key = MChw9YbuAnMJHzMlS8GIX1WsJnaNb7S9
-machine_key = Dc9QF8oTOc3RBYbxfN8Avoz8AVxAOFeN
-```
-
-0. Launch Network Settings, and create a VPN interface
-
-    Click the plus in the lower-left corner, select "VPN" as Interface, and as VPN Type select "L2TP over IPSec".  Name this service "Swandive".
-
-    ![VPN configuration - create VPN interface](https://github.com/iandennismiller/swandive/raw/master/doc/images/osx vpn config - create vpn interface.png)
-
-0. Configure Swandive VPN Server Address and Account Name
-
-    Now look at `swandive.ini` and copy the `public_ip` into "Server Address." The "Account Name" is the `user_name`.  
-
-    ![VPN configuration - server address and account](https://github.com/iandennismiller/swandive/raw/master/doc/images/osx vpn config - server address and account.png)
-
-0. Click "Authentication Settings"
-
-    0. Under User Authentication, click "Password" and copy the `user_key` into this field.
-
-    0. Under Machine Authentication, click "Shared Secret" and copy `machine_key` into this field.
-
-    ![VPN configuration - passwords](https://github.com/iandennismiller/swandive/raw/master/doc/images/osx vpn config - user password and machine secret.png)
-
-0. Click "Advanced" and enable "send all traffic over VPN connection"
-
-    This critical step will make sure to encrypt all of the traffic coming out of your machine.  If you forget this step, then the VPN actually won't do anything useful for you at all!
-
-    ![VPN configuration - passwords](https://github.com/iandennismiller/swandive/raw/master/doc/images/osx vpn config - send all traffic.png)
-
-0. Connect
-
-    You're done.  Shortly after you click connect, your machine will be given a new IP address like `192.168.79.2`.  If you visit http://whatsmyip.org you should see that your IP address is now reported to be the same as your Swandive `public_ip`.  Success!
-
-## Authentication
-
-0. What is my secret key?
-
-    pre-shared key, secret key, shared secret, password...  these all mean the same thing, in this particular context.  Different VPN clients use slightly different vocabulary, so try to experiment a little bit.
-
-0. Where are the keys?
-
-    The machine key is in `files/ipsec.secrets`, and the user keys are in `files/chap-secrets`.  You can add as many users as you want to chap-secrets.
-
-0. Why are there two keys (user and machine)?
-
-    One key is often called something like "machine key", "system secret", or "machine password", and it is used to make initial contact with the VPN server.  Everyone who contacts this VPN will use the same machine key, in the same way that everyone enters the same password for a wifi access point.  This key is stored in `files/ipsec.secrets`.
-
-    After connecting, the VPN server requires each user to authenticate with a username and password.  This is sometimes called a "user key", "user secret", "user password"...  Each user who connects to the VPN will have their own username and password, which are stored in `files/chap-secrets`.
-
-0. Why use a pre-shared key instead of SSL certificates?
-
-    Using a "pre-shared key" is basically the same as using a password.  Even though SSL certificates would provide better resistance against attack, SSL certificates are not supported by all VPN clients.  As of May 4, 2011 iOS does not support SSL certificates for L2TP/IPsec, and since I want something that would be compatible with the iPhone, there was no choice but to go with pre-shared key.
-
-## How to prepare an EC2 machine instance
-
-0. [Watch this video](http://youtu.be/qzGa9f51IOo?hd=1) to learn how to create an EC2 instance based on `ami-3e02f257`
-
-    http://youtu.be/qzGa9f51IOo?hd=1
-
-    ami-3e02f257 is based on Ubuntu 10.04, and is suitable for Swandive with an EC2 micro instance.  Just a reminder: an EC2 micro instance will cost at least $16/month, if you use the "on demand" pricing.
-
-    This video is based on steps 1-10 of Stratum Security's fantastic tutorial here: http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/
-
-0. Set up SSH on your local machine
-
-    Both Amazon EC2 and Xenadu depend on SSH public key login, which is why we created a keypair using the EC2 console. This step will set up your SSH client to automatically use `ec2identity.pem` when connecting to your Swandive host.
-
-    ```
-    export ELASTIC_IP=50.XX.XX.XX
-    mv ~/Downloads/ec2identity.pem ~/.ssh && chmod 400 ~/.ssh/ec2identity.pem
-    echo -e "\nHost $ELASTIC_IP\n  IdentityFile ~/.ssh/ec2identity.pem\n" >> ~/.ssh/config
-    ```
-
-0. Now perform a little housekeeping on your new EC2 instance
-
-    0. Connect to your new instance.  
-
-        ```
-        ssh ubuntu@$ELASTIC_IP
-        ```
-
-        If SSH is properly configured, then you will be greeted with a normal command prompt.
-
-    0. Configure root account for public key login
-
-        ```
-        sudo su -
-        cp ~ubuntu/.ssh/authorized_keys ~/.ssh/authorized_keys
-        chown root:root ~/.ssh/authorized_keys
-        ```
-
-        Xenadu requires root access so that it can set permissions when it uploads files.
-
-    0. Generate new passwords for ubuntu and root account
-
-        ```
-        perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
-        passwd ubuntu
-        perl -e '@c=(48..57,65..90,97..122); foreach (1..12) { print chr($c[rand(@c)]) }'; echo
-        passwd
-        ```
-
-        The perl script generates a random string, which you will need to copy into the password field.
-
-    0. Update the system
-
-        ```
-        apt-get update && apt-get upgrade -y
-        ```
-
-    0. Configure the timezone
-
-        ```
-        dpkg-reconfigure tzdata
-        ```
-
-    0. Disable a few unnecessary processes
-
-        ```
-        initctl stop tty2 && initctl stop tty3 && initctl stop tty4 && initctl stop tty5 && initctl stop tty6
-        rm /etc/init/tty2.conf /etc/init/tty3.conf /etc/init/tty4.conf /etc/init/tty5.conf /etc/init/tty6.conf
-        ```
-
-    0. Reboot
-
-        ```
-        reboot now
-        ```
-
-0. Done
-
-    At this point, you have a fully configured EC2 instance that is ready for Swandive.  You can go back to the Swandive installation process now.
+    To configure an OS X VPN client, read ["Configuring the OS X VPN Client"](https://github.com/iandennismiller/swandive/blob/master/doc/osx_config.md) (which is also useful for configuring an iPod/iPad/iPhone.)
 
 ## What software does Swandive use?
 
