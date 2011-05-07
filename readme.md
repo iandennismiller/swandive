@@ -1,13 +1,15 @@
 # introduction
 
-I want to encrypt my Internet traffic when using an unprotected wifi access point, and you probably do too.  The most widely supported, secure way to achieve this is with L2TP and IPsec.  I want to run this on a virtual machine somewhere in the cloud, like on an Amazon EC2 micro instance (approximately $16/month).  **Swandive creates a secure VPN transport in the cloud, letting me encrypt my laptop and iPod touch on the road.**
+Swandive creates an encrypted VPN that you can use to safely access the Internet from an unprotected network.  There are several types of VPN out there, but Swandive is the first (easy) solution that is supported, out-of-the-box, by the iPhone/iPod/iPad.
+
+Swandive is built using Openswan, which implements the widely-adopted IPSec standard, meaning there are tons of VPN clients that are compatible with Swandive.  IPSec/L2TP is supported natively by OS X, Windows, iOS, Android, routers, and other devices.  It is possible to create multiple accounts to share a single Swandive server among friends.
+
+Whether you are accessing the Internet at a coffee shop, at work, or on the road...  whether it is a laptop, a smartphone, a server...  in all cases, if you do not trust the network you are using, then you should be encrypting your traffic.  Swandive is the universal VPN solution.
 
 # requirements
 
 - Amazon EC2 account
-- one EC2 SSH keypair
-- one EC2 micro instance
-- one Amazon Elastic IP address
+- EC2 micro instance (approx $16/month at current on-demand rates)
 - Xenadu (http://github.com/iandennismiller/xenadu)
 
 # installation
