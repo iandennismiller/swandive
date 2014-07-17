@@ -71,7 +71,7 @@
     0. Reboot
 
         ```
-        reboot now
+        reboot
         ```
 
 0. Done
